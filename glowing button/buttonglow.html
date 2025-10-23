@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Futuristic Button</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* 🔮 Extra CSS for realistic glow and active effect */
+    .futuristic-btn {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .futuristic-btn::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(120deg, #00f5ff, #007bff, #00f5ff);
+      transform: rotate(45deg);
+      opacity: 0;
+      transition: opacity 0.4s, transform 0.6s;
+    }
+
+    .futuristic-btn:hover::before {
+      opacity: 0.6;
+      transform: rotate(0deg);
+      filter: blur(10px);
+    }
+
+    .futuristic-btn:active {
+      transform: scale(0.95);
+      box-shadow: 0 0 25px #00d0ff inset;
+    }
+
+    .futuristic-btn span {
+      position: relative;
+      z-index: 10;
+    }
+  </style>
+</head>
+<body class="flex items-center justify-center h-screen bg-gray-950">
+
+  <button class="futuristic-btn px-8 py-4 bg-[#0a0f1f] text-cyan-300 font-bold rounded-xl border border-cyan-500 shadow-[0_0_15px_#00f5ff] hover:shadow-[0_0_35px_#00f5ff,0_0_60px_#00bfff] transition-all duration-500 ease-in-out">
+    <span>Activate System</span>
+  </button>
+
+</body>
+</html>

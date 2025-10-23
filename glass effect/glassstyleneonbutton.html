@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glass Button</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .glass-btn {
+      backdrop-filter: blur(15px);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(0, 255, 255, 0.4);
+      transition: all 0.4s ease;
+    }
+    .glass-btn:hover {
+      background: rgba(0, 255, 255, 0.1);
+      box-shadow: 0 0 30px #00ffff, inset 0 0 10px #00ffff;
+      transform: scale(1.05);
+    }
+    .glass-btn:active {
+      transform: scale(0.95);
+      box-shadow: 0 0 20px #00ffff inset;
+    }
+  </style>
+</head>
+<body class="bg-[#050d20] flex items-center justify-center h-screen">
+
+  <button class="glass-btn text-cyan-300 px-8 py-4 rounded-xl font-bold uppercase tracking-wider">
+    <span>Glass Mode</span>
+  </button>
+
+</body>
+</html>

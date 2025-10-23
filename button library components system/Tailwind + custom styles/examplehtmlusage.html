@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Button Library Demo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="buttons.css" />
+</head>
+<body class="bg-gray-950 min-h-screen flex flex-col items-center justify-center gap-8 text-white">
+
+  <button class="btn-ripple px-8 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-all">
+    Ripple Button
+  </button>
+
+  <button class="btn-glow px-8 py-3 rounded-lg bg-[#0a0f1f] border border-cyan-500 text-cyan-300 font-bold" style="--glow-color:#00f5ff">
+    Glow Pulse
+  </button>
+
+  <button class="btn-gradient px-8 py-3 text-white font-bold rounded-lg">
+    Gradient Button
+  </button>
+
+  <button data-toggle="true" class="btn-ripple px-8 py-3 bg-gray-700 text-gray-200 rounded-lg font-semibold">
+    Toggle Mode
+  </button>
+
+  <script type="module">
+    import { initButtons } from './buttons.js';
+    initButtons();
+  </script>
+</body>
+</html>

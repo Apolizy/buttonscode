@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gradient Cyber Button</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes gradient-flow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .gradient-btn {
+      background: linear-gradient(90deg, #00f5ff, #007bff, #8a2be2, #ff00ff);
+      background-size: 300% 300%;
+      animation: gradient-flow 4s ease infinite;
+      transition: all 0.4s ease-in-out;
+    }
+    .gradient-btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 30px #00f5ff, 0 0 60px #8a2be2;
+    }
+    .gradient-btn:active {
+      transform: scale(0.96);
+    }
+  </style>
+</head>
+<body class="bg-[#050d20] flex items-center justify-center h-screen">
+
+  <button class="gradient-btn px-8 py-4 text-white font-semibold rounded-2xl tracking-wide">
+    <span>Cyber Gradient</span>
+  </button>
+
+</body>
+</html>

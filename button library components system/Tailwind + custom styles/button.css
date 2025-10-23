@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 🔮 Ripple effect core */
+.btn-ripple {
+  position: relative;
+  overflow: hidden;
+}
+.btn-ripple span {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  animation: ripple-animation 0.6s linear;
+  background: rgba(255, 255, 255, 0.3);
+}
+@keyframes ripple-animation {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* ⚡ Glow pulse */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 15px var(--glow-color);
+  }
+  50% {
+    box-shadow: 0 0 35px var(--glow-color);
+  }
+}
+.btn-glow:hover {
+  animation: pulse-glow 1.5s infinite;
+}
+
+/* 🧊 Glass effect */
+.btn-glass {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* 🌈 Gradient move */
+@keyframes gradient-move {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.btn-gradient {
+  background: linear-gradient(270deg, #ff00cc, #3333ff, #00ffff);
+  background-size: 200% 200%;
+  animation: gradient-move 5s ease infinite;
+}
+
+/* 🟢 Toggle active style */
+.btn-toggle-active {
+  background-color: #22c55e !important;
+  color: white !important;
+  box-shadow: 0 0 15px #22c55e;
+}

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pro Button Styles</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* 🔮 1. Ripple effect */
+    .ripple {
+      position: relative;
+      overflow: hidden;
+    }
+    .ripple span {
+      position: absolute;
+      border-radius: 50%;
+      transform: scale(0);
+      animation: ripple-animation 0.6s linear;
+      background: rgba(255, 255, 255, 0.3);
+    }
+    @keyframes ripple-animation {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+
+    /* 🌈 3. Gradient shift */
+    @keyframes gradient-move {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* 🧊 5. Glass button */
+    .glass {
+      backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    /* ⚙️ 7. Toggle button animation */
+    .toggle-active {
+      background-color: #22c55e !important;
+      color: white !important;
+      box-shadow: 0 0 15px #22c55e;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center gap-6 bg-gray-950 text-white p-8">
+
+  <!-- 1️⃣ Ripple Button -->
+  <button class="ripple px-8 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold text-white relative overflow-hidden">
+    Ripple Button
+  </button>
+
+  <!-- 2️⃣ Futuristic Glow -->
+  <button class="px-8 py-3 bg-[#0a0f1f] border border-cyan-500 text-cyan-300 font-semibold rounded-lg shadow-[0_0_20px_#00ffff] hover:shadow-[0_0_40px_#00bfff,0_0_70px_#0099ff] transition-all duration-500">
+    Futuristic Glow
+  </button>
+
+  <!-- 3️⃣ Gradient Shift Button -->
+  <button class="px-8 py-3 text-white font-bold rounded-lg bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 bg-[length:200%_200%] animate-[gradient-move_4s_ease_infinite]">
+    Gradient Shift
+  </button>
+
+  <!-- 4️⃣ Outline Hover Fill -->
+  <button class="px-8 py-3 rounded-lg border border-white text-white font-semibold hover:bg-white hover:text-gray-900 transition-all duration-500">
+    Outline Fill
+  </button>
+
+  <!-- 5️⃣ Glass (Neon UI) -->
+  <button class="glass px-8 py-3 text-cyan-200 font-semibold rounded-xl shadow-[0_0_15px_#00ffff] hover:shadow-[0_0_35px_#00ffff] transition-all duration-500">
+    Glass Glow
+  </button>
+
+  <!-- 6️⃣ Neon Border Loop -->
+  <button class="relative px-8 py-3 bg-transparent border-2 border-lime-400 text-lime-300 rounded-lg font-semibold overflow-hidden group">
+    <span class="absolute inset-0 bg-gradient-to-r from-lime-400 via-green-500 to-lime-400 opacity-0 group-hover:opacity-20 blur-xl transition-all duration-700"></span>
+    <span class="relative">Neon Border</span>
+  </button>
+
+  <!-- 7️⃣ Toggle / Active Switch -->
+  <button id="toggleBtn" class="px-8 py-3 rounded-lg bg-gray-700 text-gray-300 font-semibold transition-all duration-300">
+    Toggle Mode
+  </button>
+
+  <script>
+    // 1️⃣ Ripple Effect Logic
+    document.querySelectorAll('.ripple').forEach(btn => {
+      btn.addEventListener('click', function (e) {
+        const circle = document.createElement('span');
+        const rect = this.getBoundingClientRect();
+        circle.style.left = `${e.clientX - rect.left}px`;
+        circle.style.top = `${e.clientY - rect.top}px`;
+        this.appendChild(circle);
+        setTimeout(() => circle.remove(), 600);
+      });
+    });
+
+    // 7️⃣ Toggle Button Logic
+    const toggleBtn = document.getElementById('toggleBtn');
+    toggleBtn.addEventListener('click', () => {
+      toggleBtn.classList.toggle('toggle-active');
+      toggleBtn.textContent = toggleBtn.classList.contains('toggle-active')
+        ? 'Active Mode'
+        : 'Toggle Mode';
+    });
+  </script>
+</body>
+</html>

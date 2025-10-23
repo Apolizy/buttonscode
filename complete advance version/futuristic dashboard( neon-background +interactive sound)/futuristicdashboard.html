@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Futuristic Button Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* ===== BACKGROUND ANIMATION ===== */
+    @keyframes move-bg {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #020617, #000, #001f33);
+      background-size: 300% 300%;
+      animation: move-bg 15s ease infinite;
+      color: #00f5ff;
+      font-family: 'Poppins', sans-serif;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Floating neon particles */
+    .neon-orb {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,255,255,0.5) 0%, transparent 70%);
+      animation: float 10s infinite alternate ease-in-out;
+      filter: blur(40px);
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px) translateX(0px); }
+      100% { transform: translateY(100px) translateX(50px); }
+    }
+
+    /* ===== COMMON CARD STYLE ===== */
+    .card {
+      backdrop-filter: blur(20px);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(0, 255, 255, 0.2);
+      box-shadow: 0 0 25px rgba(0, 255, 255, 0.1);
+    }
+
+    /* ===== BUTTONS ===== */
+    .btn {
+      transition: all 0.3s ease-in-out;
+    }
+    .btn.active {
+      box-shadow: 0 0 35px #00ffff, inset 0 0 15px #00ffff;
+      transform: scale(1.05);
+      color: #0ff;
+    }
+    .btn:active {
+      transform: scale(0.95);
+    }
+
+    /* Glow Animations */
+    @keyframes gradient-flow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .gradient-btn {
+      background: linear-gradient(90deg, #00f5ff, #007bff, #8a2be2, #ff00ff);
+      background-size: 300% 300%;
+      animation: gradient-flow 5s ease infinite;
+    }
+
+    /* Ripple Effect */
+    .ripple-btn {
+      position: relative;
+      overflow: hidden;
+    }
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(0, 255, 255, 0.4);
+      width: 20px;
+      height: 20px;
+      transform: scale(0);
+      animation: ripple-effect 0.6s linear;
+    }
+    @keyframes ripple-effect {
+      to {
+        transform: scale(10);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body class="flex flex-col items-center justify-center gap-12 p-6">
+
+  <!-- Neon background glow orbs -->
+  <div class="neon-orb" style="width: 300px; height: 300px; top: 10%; left: 10%;"></div>
+  <div class="neon-orb" style="width: 200px; height: 200px; bottom: 10%; right: 15%;"></div>
+  <div class="neon-orb" style="width: 250px; height: 250px; top: 60%; left: 40%; animation-delay: 3s;"></div>
+
+  <h1 class="text-3xl md:text-5xl font-bold text-cyan-300 z-10">🧠 Futuristic Control Dashboard</h1>
+
+  <div class="grid md:grid-cols-3 gap-10 w-full max-w-5xl z-10">
+    <!-- Glass Button -->
+    <div class="card p-8 rounded-2xl flex flex-col items-center gap-6">
+      <h2 class="text-xl font-semibold text-cyan-200">Glass Mode</h2>
+      <button id="glass-btn"
+        class="btn glass-btn text-cyan-300 px-8 py-4 rounded-xl font-bold uppercase tracking-wider">
+        <span>Activate</span>
+      </button>
+    </div>
+
+    <!-- Gradient Button -->
+    <div class="card p-8 rounded-2xl flex flex-col items-center gap-6">
+      <h2 class="text-xl font-semibold text-cyan-200">Cyber Gradient</h2>
+      <button id="gradient-btn"
+        class="btn gradient-btn px-8 py-4 text-white font-semibold rounded-2xl tracking-wide">
+        <span>Activate</span>
+      </button>
+    </div>
+
+    <!-- Ripple Button -->
+    <div class="card p-8 rounded-2xl flex flex-col items-center gap-6">
+      <h2 class="text-xl font-semibold text-cyan-200">Ripple Glow</h2>
+      <button id="ripple-btn"
+        class="btn ripple-btn px-8 py-4 bg-[#0a0f1f] text-cyan-300 font-bold rounded-xl border border-cyan-500 shadow-[0_0_15px_#00f5ff] relative overflow-hidden">
+        <span>Activate</span>
+      </button>
+    </div>
+  </div>
+
+  <footer class="mt-12 text-cyan-400 text-sm opacity-80 z-10">
+    Created with ⚡ Tailwind + CSS + JS
+  </footer>
+
+  <!-- SOUNDS -->
+  <audio id="sound-on" src="https://cdn.pixabay.com/audio/2022/03/15/audio_94691b7df0.mp3"></audio>
+  <audio id="sound-off" src="https://cdn.pixabay.com/audio/2022/03/15/audio_d8a5e37b38.mp3"></audio>
+
+  <script>
+    // Simple toggle + sound logic
+    const buttons = document.querySelectorAll('.btn');
+    const soundOn = document.getElementById('sound-on');
+    const soundOff = document.getElementById('sound-off');
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        if (btn.classList.contains('ripple-btn')) {
+          const ripple = document.createElement('span');
+          ripple.classList.add('ripple');
+          ripple.style.left = e.offsetX + 'px';
+          ripple.style.top = e.offsetY + 'px';
+          btn.appendChild(ripple);
+          setTimeout(() => ripple.remove(), 600);
+        }
+
+        // Toggle glow + play sound
+        if (btn.classList.contains('active')) {
+          btn.classList.remove('active');
+          soundOff.currentTime = 0;
+          soundOff.play();
+        } else {
+          btn.classList.add('active');
+          soundOn.currentTime = 0;
+          soundOn.play();
+        }
+      });
+    });
+  </script>
+</body>
+</html>

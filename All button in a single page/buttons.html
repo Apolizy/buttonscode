@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Futuristic Button Showcase</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* ====== GLASS BUTTON ====== */
+    .glass-btn {
+      backdrop-filter: blur(15px);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(0, 255, 255, 0.4);
+      transition: all 0.4s ease;
+    }
+    .glass-btn:hover {
+      background: rgba(0, 255, 255, 0.1);
+      box-shadow: 0 0 30px #00ffff, inset 0 0 10px #00ffff;
+      transform: scale(1.05);
+    }
+    .glass-btn:active {
+      transform: scale(0.95);
+      box-shadow: 0 0 20px #00ffff inset;
+    }
+
+    /* ====== CYBER GRADIENT BUTTON ====== */
+    @keyframes gradient-flow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .gradient-btn {
+      background: linear-gradient(90deg, #00f5ff, #007bff, #8a2be2, #ff00ff);
+      background-size: 300% 300%;
+      animation: gradient-flow 4s ease infinite;
+      transition: all 0.4s ease-in-out;
+    }
+    .gradient-btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 30px #00f5ff, 0 0 60px #8a2be2;
+    }
+    .gradient-btn:active {
+      transform: scale(0.96);
+    }
+
+    /* ====== RIPPLE GLOW BUTTON ====== */
+    .ripple-btn {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease-in-out;
+    }
+    .ripple-btn:hover {
+      box-shadow: 0 0 25px #00f5ff, inset 0 0 10px #00f5ff;
+      transform: scale(1.05);
+    }
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(0, 255, 255, 0.5);
+      width: 20px;
+      height: 20px;
+      transform: scale(0);
+      animation: ripple-effect 0.6s linear;
+    }
+    @keyframes ripple-effect {
+      to {
+        transform: scale(10);
+        opacity: 0;
+      }
+    }
+
+    /* ====== PAGE STYLE ====== */
+    body {
+      background: radial-gradient(circle at center, #020617 0%, #000 100%);
+      color: #00f5ff;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .card {
+      backdrop-filter: blur(20px);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(0, 255, 255, 0.2);
+      box-shadow: 0 0 25px rgba(0, 255, 255, 0.1);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center gap-10 text-center p-6">
+
+  <h1 class="text-3xl md:text-5xl font-bold text-cyan-300 mb-6">⚡ Futuristic Button Showcase ⚡</h1>
+
+  <div class="grid md:grid-cols-3 gap-10 w-full max-w-5xl">
+    
+    <!-- Glass Button -->
+    <div class="card p-8 rounded-2xl flex flex-col items-center gap-6">
+      <h2 class="text-xl font-semibold text-cyan-200">Glass Mode</h2>
+      <button class="glass-btn text-cyan-300 px-8 py-4 rounded-xl font-bold uppercase tracking-wider">
+        <span>Activate Glass</span>
+      </button>
+    </div>
+
+    <!-- Gradient Button -->
+    <div class="card p-8 rounded-2xl flex flex-col items-center gap-6">
+      <h2 class="text-xl font-semibold text-cyan-200">Cyber Gradient</h2>
+      <button class="gradient-btn px-8 py-4 text-white font-semibold rounded-2xl tracking-wide">
+        <span>Activate Gradient</span>
+      </button>
+    </div>
+
+    <!-- Ripple Button -->
+    <div class="card p-8 rounded-2xl flex flex-col items-center gap-6">
+      <h2 class="text-xl font-semibold text-cyan-200">Ripple Glow</h2>
+      <button class="ripple-btn px-8 py-4 bg-[#0a0f1f] text-cyan-300 font-bold rounded-xl border border-cyan-500 shadow-[0_0_15px_#00f5ff] relative overflow-hidden">
+        <span>Activate Ripple</span>
+      </button>
+    </div>
+
+  </div>
+
+  <footer class="mt-12 text-cyan-500 text-sm opacity-80">
+    Created with 💙 by You + Tailwind CSS
+  </footer>
+
+  <script>
+    // Add ripple effect for all ripple-btns
+    document.querySelectorAll('.ripple-btn').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        const ripple = document.createElement('span');
+        ripple.classList.add('ripple');
+        ripple.style.left = e.offsetX + 'px';
+        ripple.style.top = e.offsetY + 'px';
+        this.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 600);
+      });
+    });
+  </script>
+</body>
+</html>

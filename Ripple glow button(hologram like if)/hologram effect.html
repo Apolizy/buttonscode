@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ripple Glow Button</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .ripple-btn {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease-in-out;
+    }
+    .ripple-btn::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: rgba(0, 255, 255, 0.4);
+      border-radius: 50%;
+      transform: scale(0);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.6s, opacity 0.6s;
+    }
+    .ripple-btn:active::after {
+      transform: scale(10);
+      opacity: 0.4;
+      transition: 0s;
+    }
+    .ripple-btn:hover {
+      box-shadow: 0 0 25px #00f5ff, inset 0 0 10px #00f5ff;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body class="bg-[#050d20] flex items-center justify-center h-screen">
+
+  <button class="ripple-btn px-8 py-4 bg-[#0a0f1f] text-cyan-300 font-bold rounded-xl border border-cyan-500 shadow-[0_0_15px_#00f5ff]">
+    <span>Ripple Effect</span>
+  </button>
+
+  <script>
+    // JS to make ripple appear where clicked
+    document.querySelector('.ripple-btn').addEventListener('click', function(e) {
+      const x = e.clientX - e.target.offsetLeft;
+      const y = e.clientY - e.target.offsetTop;
+      const ripple = document.createElement('span');
+      ripple.style.left = x + 'px';
+      ripple.style.top = y + 'px';
+      ripple.classList.add('ripple');
+      this.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 600);
+    });
+  </script>
+
+  <style>
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(0, 255, 255, 0.5);
+      width: 20px;
+      height: 20px;
+      transform: scale(0);
+      animation: ripple-effect 0.6s linear;
+    }
+    @keyframes ripple-effect {
+      to {
+        transform: scale(10);
+        opacity: 0;
+      }
+    }
+  </style>
+
+</body>
+</html>
